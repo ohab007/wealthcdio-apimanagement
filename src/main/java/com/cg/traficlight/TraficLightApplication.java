@@ -1,4 +1,4 @@
-package com.cg.trafic_light;
+package com.cg.traficlight;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

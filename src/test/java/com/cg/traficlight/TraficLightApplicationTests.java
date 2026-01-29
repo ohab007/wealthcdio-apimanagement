@@ -1,4 +1,4 @@
-package com.cg.trafic_light;
+package com.cg.traficlight;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

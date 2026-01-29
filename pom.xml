@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.cg</groupId>
-	<artifactId>trafic-light</artifactId>
+	<artifactId>traficlight</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>trafic-light</name>
+	<name>traficlight</name>
 	<description>Trafic Light System</description>
 	<url/>
 	<licenses>
