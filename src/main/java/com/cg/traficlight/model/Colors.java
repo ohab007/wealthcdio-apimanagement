@@ -1,5 +1,5 @@
 package com.cg.traficlight.model;
 
-public enum States {
+public enum Colors {
     GREEN, YELLOW, RED;
 }
