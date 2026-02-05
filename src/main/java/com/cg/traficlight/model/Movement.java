@@ -1,11 +1,11 @@
 package com.cg.traficlight.model;
 
-public class Phase {
+public class Movement {
     private Directions direction;
     private Colors colors;
     private long durationMillis;
 
-    public Phase(Directions direction, Colors colors, long durationMillis) {
+    public Movement(Directions direction, Colors colors, long durationMillis) {
         this.direction = direction;
         this.colors = colors;
         this.durationMillis = durationMillis;

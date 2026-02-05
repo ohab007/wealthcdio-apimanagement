@@ -1,6 +1,6 @@
 package com.cg.traficlight.model;
 
-public class LightSequence {
+public class SignalSequence {
 
     private long timeGreenNS = 20;
 

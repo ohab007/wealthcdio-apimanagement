@@ -1,7 +1,7 @@
 package com.cg.traficlight.controller;
 
-import com.cg.traficlight.model.LightSequence;
-import com.cg.traficlight.model.State;
+import com.cg.traficlight.model.SignalSequence;
+import com.cg.traficlight.model.Response;
 import com.cg.traficlight.model.TraficLightHistory;
 import com.cg.traficlight.service.TrafficLightService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +18,12 @@ public class TraficLightController {
     private TrafficLightService service;
 
     @GetMapping("/status")
-    public ResponseEntity<State> status() {
+    public ResponseEntity<Response> status() {
         return ResponseEntity.ok(service.getStatus());
     }
 
     @PostMapping("/sequence")
-    public ResponseEntity<String> setSequence(@RequestBody LightSequence req) {
+    public ResponseEntity<String> setSequence(@RequestBody SignalSequence req) {
         service.setSequence(req);
         return ResponseEntity.ok("Sequence updated");
     }

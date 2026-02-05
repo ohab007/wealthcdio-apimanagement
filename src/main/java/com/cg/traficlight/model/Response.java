@@ -1,14 +1,18 @@
 package com.cg.traficlight.model;
 
-public class State {
+import java.util.EnumMap;
+
+public class Response {
 
     private Directions activeDirection;
+
+    private EnumMap <Directions,Colors> inactiveState;
 
     private Colors activeColor;
 
     private boolean paused;
 
-    public State() {
+    public Response() {
     }
 
     public Directions getActiveDirection() {
@@ -33,5 +37,13 @@ public class State {
 
     public void setPaused(boolean paused) {
         this.paused = paused;
+    }
+
+    public EnumMap<Directions, Colors> getInactiveState() {
+        return inactiveState;
+    }
+
+    public void setInactiveState(EnumMap<Directions, Colors> inactiveState) {
+        this.inactiveState = inactiveState;
     }
 }
