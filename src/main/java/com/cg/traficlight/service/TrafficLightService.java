@@ -35,8 +35,6 @@ public class TrafficLightService {
 
     private volatile ScheduledFuture<?> scheduledFuture;
 
-    private LocalDateTime stateStartTime = LocalDateTime.now();
-
     private volatile boolean paused = false;
 
     public TrafficLightService() {
@@ -151,13 +149,10 @@ public class TrafficLightService {
         if (movementsList.isEmpty()) return;
         int idx = currentPhaseIndex.get() % movementsList.size();
         Movement current = movementsList.get(idx);
-
-        // Defensive validation: ensure no inactive direction is GREEN at the same time
         Response status = getStatus();
         boolean anyInactiveGreen = status.getInactiveState().values().stream()
                 .anyMatch(c -> c == Colors.GREEN);
         if (anyInactiveGreen) {
-            // Pause and cancel scheduling to fail-fast on configuration/runtime conflict
             lock.lock();
             try {
                 paused = true;
@@ -165,7 +160,7 @@ public class TrafficLightService {
             } finally {
                 lock.unlock();
             }
-            throw new IllegalStateException("Conflicting GREEN lights detected: inactive directions contain GREEN");
+            throw new IllegalStateException("Conflicting GREEN lights detected");
         }
 
         long duration = current.getDurationMillis();
@@ -209,6 +204,4 @@ public class TrafficLightService {
         long limit = (maxRecordSize == null) ? copy.size() : maxRecordSize;
         return copy.stream().limit(limit).toList();
     }
-
-
 }
