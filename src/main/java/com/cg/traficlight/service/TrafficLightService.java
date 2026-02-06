@@ -102,36 +102,36 @@ public class TrafficLightService {
     }
 
     public Response getStatus() {
-        Response s = new Response();
+        Response response = new Response();
         EnumMap<Directions, Colors> lights = new EnumMap<>(Directions.class);
         List<Movement> movementsList = movements;
-        int idx = currentPhaseIndex.get() % movementsList.size();
-        Movement p = movementsList.get(idx);
-        s.setActiveDirection(p.getDirection());
-        if (p.getDirection() == Directions.NORTH) {
-            s.setActiveColor(p.getColors());
+        int index = currentPhaseIndex.get() % movementsList.size();
+        Movement movement = movementsList.get(index);
+        response.setActiveDirection(movement.getDirection());
+        if (movement.getDirection() == Directions.NORTH) {
+            response.setActiveColor(movement.getColors());
             lights.put(Directions.EAST, Colors.RED);
             lights.put(Directions.SOUTH, Colors.RED);
             lights.put(Directions.WEST, Colors.RED);
-        } else if (p.getDirection() == Directions.EAST) {
-            s.setActiveColor(p.getColors());
+        } else if (movement.getDirection() == Directions.EAST) {
+            response.setActiveColor(movement.getColors());
             lights.put(Directions.NORTH, Colors.RED);
             lights.put(Directions.SOUTH, Colors.RED);
             lights.put(Directions.WEST, Colors.RED);
-        } else if (p.getDirection() == Directions.SOUTH) {
-            s.setActiveColor(p.getColors());
+        } else if (movement.getDirection() == Directions.SOUTH) {
+            response.setActiveColor(movement.getColors());
             lights.put(Directions.EAST, Colors.RED);
             lights.put(Directions.NORTH, Colors.RED);
             lights.put(Directions.WEST, Colors.RED);
         } else {
-            s.setActiveColor(p.getColors());
+            response.setActiveColor(movement.getColors());
             lights.put(Directions.EAST, Colors.RED);
             lights.put(Directions.SOUTH, Colors.RED);
             lights.put(Directions.NORTH, Colors.RED);
         }
-        s.setInactiveState(lights);
-        s.setPaused(paused);
-        return s;
+        response.setInactiveState(lights);
+        response.setPaused(paused);
+        return response;
     }
 
     private void startCycle() {
@@ -147,8 +147,9 @@ public class TrafficLightService {
     private void scheduleCurrentPhase(long delayMillis) {
         List<Movement> movementsList = movements;
         if (movementsList.isEmpty()) return;
-        int idx = currentPhaseIndex.get() % movementsList.size();
-        Movement current = movementsList.get(idx);
+        int index = currentPhaseIndex.get() % movementsList.size();
+        System.out.println("currentPhaseIndex.get() " + currentPhaseIndex.get() + " movementsList.size " + movementsList.size() + "index "+index);
+        Movement current = movementsList.get(index);
         Response status = getStatus();
         boolean anyInactiveGreen = status.getInactiveState().values().stream()
                 .anyMatch(c -> c == Colors.GREEN);
